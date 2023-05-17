@@ -12,10 +12,18 @@ class Demo(Frame):
         for key in demos:
             var = IntVar()
             Checkbutton(self, text=key, variable=var, command=demos[key]).pack(side=LEFT)
+            self.vars.append(var)
 
-        Quitter(self).pack(side=TOP, fill=BOTH)
+    def report(self):
+        for var in self.vars:
+            print(var.get(), end=' ')
+            print()
 
-    def printit(self, name):
-        print(name, 'returns =>', demos[name]())
+    def tools(self):
+        frm = Frame(self, bd=2, relief=GROOVE, padx=2, pady=2)
+        frm.pack(side=RIGHT)
+        Button(frm, text='State', command=self.report).pack(fill=X)
+        Quitter(frm).pack(fill=X)
 
+    
 if __name__=='__main__': Demo().mainloop()
